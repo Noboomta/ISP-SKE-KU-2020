@@ -1,0 +1,57 @@
+import java.io.*;
+import java.util.Scanner;
+
+/
+ *
+ * @author Bhatara Chaemchan SKE17
+ * The class for read readfile, count value
+ * and return a total value in a file.
+ */
+public class Counter {
+
+    int count;
+    double total;
+    /
+     * method for readfile, count value and total value in a file
+     * @param filename filename for read.
+     */
+    public void readfile(String filename){
+        double val;
+        try {
+            File file = new File(filename);
+            Scanner myReader = new Scanner(file);
+            while (myReader.hasNextLine()) {
+                String data = myReader.nextLine();
+                if(!(data.startsWith("#") || data.isEmpty())) {
+                    val = Double.parseDouble(data);
+                    count++;
+                    total += val;
+                }
+                else{
+                    continue;
+                }
+
+            }
+            myReader.close();
+        } catch (FileNotFoundException e) {
+            System.out.println("File not found:" + filename);
+        }
+    }
+
+    /
+     *
+     * @return Return the number of values read so far.
+     */
+    public int getCount(){
+        return count;
+    }
+
+    /
+     *
+     * @return Return the total of values
+     */
+    public double getTotal(){
+        return total;
+    }
+
+}
